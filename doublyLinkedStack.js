@@ -1,11 +1,12 @@
-class Node {
+class DoublyNode {
     constructor (val) {
         this.value = val;
+        this.prev = null;
         this.next = null;
     }
 }
 
-class Stack {
+class DoublyStack {
     constructor() {
         this.first = null;
         this.last = null;
@@ -13,12 +14,13 @@ class Stack {
     }
     push(value) {
         this.size++;
-        let newNode = new Node(value);
+        let newNode = new DoublyNode(value);
         if(this.first) {
             let currentFirst = this.first;
             this.first= newNode;
             newNode.next = currentFirst;
-        }else {
+            currentFirst.prev = this.first;
+        } else{
             this.first = newNode;
             this.last = newNode;
         }
@@ -29,6 +31,7 @@ class Stack {
         if(this.first) {
             let firstItem = this.first;
             this.first = this.first.next;
+            this.first.prev = null;
             return firstItem.value;
         }
         return null;
